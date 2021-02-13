@@ -31,7 +31,7 @@ public class Order implements Serializable {
 	private Long id;
 	private String address;
 	private Double latitude;
-	private Double Longitude;
+	private Double longitude;
 	private Instant moment;
 	private OrderStatus status;
 	
@@ -46,11 +46,10 @@ public class Order implements Serializable {
 	/* Instance | Constructor using Fields */
 
 	public Order(Long id, String address, Double latitude, Double longitude, Instant moment, OrderStatus status) {
-		super();
 		this.id = id;
 		this.address = address;
 		this.latitude = latitude;
-		Longitude = longitude;
+		this.longitude = longitude;
 		this.moment = moment;
 		this.status = status;
 	}
@@ -83,11 +82,11 @@ public class Order implements Serializable {
 	}
 
 	public Double getLongitude() {
-		return Longitude;
+		return longitude;
 	}
 
 	public void setLongitude(Double longitude) {
-		Longitude = longitude;
+		this.longitude = longitude;
 	}
 
 	public Instant getMoment() {

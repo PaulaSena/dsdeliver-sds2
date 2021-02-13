@@ -6,32 +6,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.devsuperior.dsdeliver.dto.ProductDTO;
-import com.devsuperior.dsdeliver.entities.Product;
-import com.devsuperior.dsdeliver.repositories.ProductRepository;
+import com.devsuperior.dsdeliver.dto.OrderDTO;
+import com.devsuperior.dsdeliver.entities.Order;
+import com.devsuperior.dsdeliver.repositories.OrderRepository;
+
 
 @Service
-
-public class ProductService {
+public class OrderService {
 	/*DTO data transfer objects recebe camada serviço*/
 	
 	/*injeção instanciar corretamente a dependencia*/
 	
 	@Autowired
-	private ProductRepository repository;
+	private OrderRepository repository;
 	
-	public ProductService(ProductRepository repository) {
+	public OrderService(OrderRepository repository) {
 		this.repository = repository;
 	}
 	
 	@Transactional(readOnly = true)  /*Spring garantia de conexão com o banco*/
-	public List<ProductDTO> findAll()  {
-		List<Product> list = repository.findAllByOrderByNameAsc();
-		return list.stream().map(x -> new ProductDTO(x)).collect(Collectors.toList());
-		
+	public List<OrderDTO> findAll()  {
+		List<Order> list = repository.findOrdersWithProducts();/*do mais antigo ao mais recente pendente*/
+		return list.stream().map(x -> new OrderDTO(x)).collect(Collectors.toList());
 	}
 	
-	
-	
-
 }
+
