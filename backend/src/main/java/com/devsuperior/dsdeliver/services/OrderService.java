@@ -49,5 +49,14 @@ public class OrderService {
 		order = repository.save(order);
 		return new OrderDTO(order);
 	}
+	
+	@Transactional /* Alteração no banco de dados apos salvo com o getOne JPA| Método para confirmar pedido Entregue */
+	public OrderDTO setDelivered(Long id)  {
+		Order order = repository.getOne(id);
+		order.setStatus(OrderStatus.DELIVERED);
+		order = repository.save(order);
+		return new OrderDTO(order);
+	}
+	
 }
 
